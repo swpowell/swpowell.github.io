@@ -1,0 +1,4 @@
+AuthUserFile /home/scott.powell/TeachingMaterial/Book/.htpasswd
+AuthName "Restricted Area"
+AuthType Basic
+require valid-user

@@ -1,0 +1,6 @@
+#Protect Directory
+AuthName "Secured Material"
+AuthType Basic
+AuthUserFile /home/scott.powell$/TeachingMaterial/MR3522/practice/.htpasswd
+Require valid-user
+
