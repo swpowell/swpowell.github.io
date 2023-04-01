@@ -11,11 +11,10 @@
         var ticker = $("#ticker").val();
 
         $.ajax({
-          url: "https://ldt480qae8.execute-api.us-east-2.amazonaws.com/prod/stock",
+          url: "https://ldt480qae8.execute-api.us-east-2.amazonaws.com/prod/",
           method: "POST",
-          data: {
-            ticker: ticker
-          },
+          contentType: "application/json",
+          data: JSON.stringify({ ticker: ticker }),
           success: function(response) {
             // Remove any existing output elements
             $("#output").remove();
