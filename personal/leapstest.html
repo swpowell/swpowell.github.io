@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Ticker Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#stock-form").submit(function(event) {
+        event.preventDefault();
+
+        var ticker = $("#ticker").val();
+
+        $.ajax({
+          url: "https://ldt480qae8.execute-api.us-east-2.amazonaws.com/prod/stock",
+          method: "POST",
+          data: {
+            ticker: ticker
+          },
+          success: function(response) {
+            // Create a new <div> element to display the response
+            var responseDiv = $("<div>").html(response);
+
+            // Add the <div> element to the web page
+            $("body").append(responseDiv);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Display an error message on the web page
+            var errorDiv = $("<div>").html("Error: " + errorThrown);
+            $("body").append(errorDiv);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Stock Ticker Form</h1>
+  <form id="stock-form">
+    <label for="ticker">Stock Ticker:</label>
+    <input type="text" id="ticker" name="ticker" placeholder="Enter a stock ticker...">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
