@@ -17,17 +17,28 @@
             ticker: ticker
           },
           success: function(response) {
-            // Create a new <div> element to display the response
-            var responseDiv = $("<div>").html(response);
+            // Remove any existing output elements
+            $("#output").remove();
 
-            // Add the <div> element to the web page
-            $("body").append(responseDiv);
-          },
+            // Extract the desired key from the JSON object
+            var key = response.price;
+
+            // Create a new output element to display the key
+            var outputDiv = $("<div>").attr("id", "output").html(key);
+
+            // Add the output element to the web page
+            $("body").append(outputDiv);
+            },
+
+
           error: function(jqXHR, textStatus, errorThrown) {
+            // Remove any existing output elements
+            $("#output").remove();
+
             // Display an error message on the web page
-            var errorDiv = $("<div>").html("Error: " + errorThrown);
+            var errorDiv = $("<div>").attr("id", "output").html("Error: " + errorThrown);
             $("body").append(errorDiv);
-          }
+            }
         });
       });
     });
