@@ -27,9 +27,7 @@
 
             // Add the output element to the web page
             $("body").append(outputDiv);
-            },
-
-
+          },
           error: function(jqXHR, textStatus, errorThrown) {
             // Remove any existing output elements
             $("#output").remove();
@@ -37,7 +35,7 @@
             // Display an error message on the web page
             var errorDiv = $("<div>").attr("id", "output").html("Error: " + errorThrown);
             $("body").append(errorDiv);
-            }
+          }
         });
       });
     });
