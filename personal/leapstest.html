@@ -20,10 +20,11 @@
             $("#output").remove();
 
             // Extract the desired key from the JSON object
-            var key = response.price;
+            var responseBody = JSON.parse(response.body);
+            var price = responseBody.price;
 
             // Create a new output element to display the key
-            var outputDiv = $("<div>").attr("id", "output").html(key);
+            var outputDiv = $("<div>").attr("id", "output").text(price);
 
             // Add the output element to the web page
             $("body").append(outputDiv);
