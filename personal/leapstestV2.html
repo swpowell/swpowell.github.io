@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Ticker Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#stock-form").submit(function(event) {
+        event.preventDefault();
+
+        var ticker = $("#ticker").val();
+
+        $.ajax({
+          url: "https://ldt480qae8.execute-api.us-east-2.amazonaws.com/prod/",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ ticker: ticker }),
+          success: function(response) {
+            // Remove any existing output elements
+            $("#output").remove();
+
+            // Extract the desired key from the JSON object
+            var key = response.price;
+
+            // Create a new output element to display the key
+            var outputDiv = $("<div>").attr("id", "output").html(key);
+
+            // Add the output element to the web page
+            $("body").append(outputDiv);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Remove any existing output elements
+            $("#output").remove();
+
+            // Display an error message on the web page
+            var errorDiv = $("<div>").attr("id", "output").html("Error: " + errorThrown);
+            $("body").append(errorDiv);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Stock Ticker Form</h1>
+  <form id="stock-form">
+    <label for="ticker">Stock Ticker:</label>
+    <input type="text" id="ticker" name="ticker" placeholder="Enter a stock ticker...">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
